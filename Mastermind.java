@@ -85,7 +85,7 @@ class Mastermind {
             State guess = game.getGuess();
 
             System.out.print("Guess: ");
-            for (int i = 0; i < game.positionCount; i++) System.out.print(guess.getPositionValue(i));
+            for (int i = 0; i < game.positionCount; i++) System.out.print(guess.getPositionValue(i) + " ");
             System.out.println("\nRate the guess:");
 
             GameState gameState;
@@ -105,8 +105,7 @@ class Mastermind {
                 System.out.println("Found solution!");
                 State solution = game.getGuess();
                 System.out.print("\tSolution is ");
-                for (int i = 0; i < game.positionCount; i++) System.out.print(solution.getPositionValue(i));
-                System.out.println(".");
+                for (int i = 0; i < game.positionCount; i++) System.out.print(solution.getPositionValue(i) + " ");
                 break;
             }
         }
