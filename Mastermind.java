@@ -76,6 +76,8 @@ class Mastermind {
         int positionCount = getPositiveInteger(scanner, "Enter position count: ");
         int colorCount = getPositiveInteger(scanner, "Enter color count: ");
 
+        System.out.println("---------------------------");
+
         Mastermind game = new Mastermind(positionCount, colorCount);
         while (true) {
             State guess = game.getGuess();
@@ -86,12 +88,14 @@ class Mastermind {
 
             GameState gameState;
             do {
-                int positionPoints = getNonNegativeInteger(scanner, "\tEnter correct position count:");
-                int colorPoints = getNonNegativeInteger(scanner, "\tEnter correct color count:");
+                int positionPoints = getNonNegativeInteger(scanner, "\tEnter \"correct position\" count:");
+                int colorPoints = getNonNegativeInteger(scanner, "\tEnter \"correct color\" count:");
     
                 gameState = game.rateGuess(guess, positionPoints, colorPoints);
             } while (gameState == GameState.ERROR_INCORRECT_POINTS);
             
+            System.out.println("---------------------------");
+
             if (gameState == GameState.NO_SOLUTION) {
                 System.out.println("There is no solution.");
                 break;
@@ -116,7 +120,7 @@ class Mastermind {
                 retVal = Integer.parseInt(scanner.nextLine());
             } catch(Exception e) {}
             if (retVal <= 0) {
-                System.out.println("Please enter postive integer!");
+                System.out.println("Please enter positive integer!");
                 System.out.print(message);
             }
         }
@@ -131,7 +135,7 @@ class Mastermind {
                 retVal = Integer.parseInt(scanner.nextLine());
             } catch(Exception e) {}
             if (retVal < 0) {
-                System.out.println("Please enter postive integer!");
+                System.out.println("Please enter non-negative integer!");
                 System.out.print(message);
             }
         }
