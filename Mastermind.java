@@ -12,7 +12,12 @@ class Mastermind {
         OK, ERROR_INCORRECT_STATE, ERROR_INCORRECT_POINTS, FOUND_SOLUTION, NO_SOLUTION
     };
 
-    public Mastermind(int positionCount, int colorCount) {
+    public static Mastermind createGame(int positionCount, int colorCount) {
+        if (positionCount <= 0 || colorCount <= 0) return null;
+        return new Mastermind(positionCount, colorCount);
+    }
+
+    private Mastermind(int positionCount, int colorCount) {
         possibilities = new ArrayList<State>();
         this.positionCount = positionCount;
         this.colorCount = colorCount;
@@ -40,6 +45,7 @@ class Mastermind {
     }
 
     public State getGuess() {
+        if (possibilities.size() == 0) return null;
         int randomIndex = (int) (Math.random()*possibilities.size());
         return possibilities.get(randomIndex);
     }
@@ -80,7 +86,7 @@ class Mastermind {
 
         System.out.println("---------------------------");
 
-        Mastermind game = new Mastermind(positionCount, colorCount);
+        Mastermind game = createGame(positionCount, colorCount);
         while (true) {
             State guess = game.getGuess();
 
@@ -90,8 +96,8 @@ class Mastermind {
 
             GameState gameState;
             do {
-                int positionPoints = getNonNegativeInteger(scanner, "\tEnter \"correct position\" count:");
-                int colorPoints = getNonNegativeInteger(scanner, "\tEnter \"correct color\" count:");
+                int positionPoints = getNonNegativeInteger(scanner, "\tEnter \"correct position\" count: ");
+                int colorPoints = getNonNegativeInteger(scanner, "\tEnter \"correct color\" count: ");
     
                 gameState = game.rateGuess(guess, positionPoints, colorPoints);
             } while (gameState == GameState.ERROR_INCORRECT_POINTS);
